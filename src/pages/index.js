@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby";
 import Header from "../components/Header";
 const IndexPage = ({
   data: {
-    allMdx: { edges: posts },
+    allContentfulPost: { edges: posts },
   },
 }) => {
   return (
@@ -15,8 +15,8 @@ const IndexPage = ({
       <ul>
         {posts.map(({ node }) => (
           <li>
-            <Link to={node.frontmatter.slug}>
-              {node.frontmatter.title} - {node.frontmatter.date}
+            <Link to={node.slug}>
+              {node.title} - {node.createdAt}
             </Link>
           </li>
         ))}
@@ -27,14 +27,16 @@ const IndexPage = ({
 
 export const query = graphql`
   query {
-    allMdx {
+    allContentfulPost(sort: {fields: createdAt, order: DESC}) {
       edges {
         node {
           id
-          frontmatter {
-            title
-            date
-            slug
+          createdAt(formatString: "MMM D, YYYY h:mm", locale: "FR-fr")
+          title
+          slug
+          content {
+            id
+            content
           }
         }
       }

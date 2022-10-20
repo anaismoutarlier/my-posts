@@ -12,6 +12,14 @@ module.exports = {
         path: `${__dirname}/blog`
       }
     },
-    "gatsby-plugin-mdx"
+    "gatsby-plugin-mdx",
+    {
+      resolve: "gatsby-source-contentful",
+      options: {
+        spaceId: "g88s4od1lzmv",
+        accessToken: "pPx8oqjSR9EC10Jr3NzgemtdnwzD-DKPUzUqyryIHd0"
+      }
+    },
+    "gatsby-plugin-image"
   ],
 }
